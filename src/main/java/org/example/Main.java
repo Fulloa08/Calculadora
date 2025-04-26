@@ -20,6 +20,8 @@ public class Main {
 
         System.out.println(ecuacionRecta(1,2,3,6));
 
+        calcularFigurasGeometrica();
+
     }
     public static int numeromayor(int numero1, int numero2){
         if (numero1 > numero2) {
@@ -56,17 +58,13 @@ public class Main {
         double b = y1 - (m*x1);
         return "Y = " + m + "X + " + b;
     }
-
-}
-
-public class FigurasGeometricas {
     public static double perimetroCuadrado(double lado){
         return 4 * lado;
     }
     public static double areaCuadrado(double lado){
         return lado * lado;
     }
-    public static double perimetroRectangular(double base, double altura){
+    public static double perimetroRectangulo(double base, double altura){
         return 2 * (base + altura);
     }
     public static double areaRectangulo(double base, double altura){
@@ -75,8 +73,14 @@ public class FigurasGeometricas {
     public static double perimetroCirculo (double radio ){
         return 2 * Math.PI * radio;
     }
+    public static double areaCirculo(double radio) {
+        return Math.PI * radio * radio;
+    }
     public static double volumenEsfera(double radio){
         return (4.0 / 3.0) * Math.PI * Math.pow(radio, 3);
+    }
+    public static double areaEsfera(double radio) {
+        return 4 * Math.PI * Math.pow(radio, 2);
     }
     public static double volumenCubo(double lado){
         return Math.pow(lado, 3);
@@ -92,9 +96,101 @@ public class FigurasGeometricas {
     }
     public static void calcularFigurasGeometrica(){
         Scanner scanner = new Scanner(System.in);
-
         System.out.println("Selecciona una figura geométrica:");
-        System.out.println("");
+        System.out.println("1. Cuadrado\n2. Rectángulo\n3. Círculo\n4. Esfera\n5. Cubo\n6. Cono");
+
+        int figura = scanner.nextInt();
+
+        System.out.println("Selecciona una operación:");
+        System.out.println("1. Perímetro\n2. Área\n3. Volumen (si aplica)");
+        int operacion = scanner.nextInt();
+
+        switch (figura){
+            case 1:
+                System.out.println("Ingresa el lado:");
+                double lado = scanner.nextDouble();
+                if (operacion == 1) {
+                    System.out.println("Perímetro: " + perimetroCuadrado(lado));
+                } else if (operacion == 2) {
+                    System.out.println("Área: " + areaCuadrado(lado));
+                } else {
+                    System.out.println("Operación no válida para un cuadrado.");
+                }
+                break;
+
+            case 2: // Rectángulo
+                System.out.println("Ingresa la base:");
+                double base = scanner.nextDouble();
+                System.out.println("Ingresa la altura:");
+                double altura = scanner.nextDouble();
+                if (operacion == 1) {
+                    System.out.println("Perímetro: " + perimetroRectangulo(base, altura));
+                } else if (operacion == 2) {
+                    System.out.println("Área: " + areaRectangulo(base, altura));
+                } else {
+                    System.out.println("Operación no válida para un rectángulo.");
+                }
+                break;
+
+            case 3: // Círculo
+                System.out.println("Ingresa el radio:");
+                double radio = scanner.nextDouble();
+                if (operacion == 1) {
+                    System.out.println("Perímetro: " + perimetroCirculo(radio));
+                } else if (operacion == 2) {
+                    System.out.println("Área: " + areaCirculo(radio));
+                } else {
+                    System.out.println("Operación no válida para un círculo.");
+                }
+                break;
+
+            case 4: // Esfera
+                System.out.println("Ingresa el radio:");
+                radio = scanner.nextDouble();
+                if (operacion == 2) {
+                    System.out.println("Área: " + areaEsfera(radio));
+                } else if (operacion == 3) {
+                    System.out.println("Volumen: " + volumenEsfera(radio));
+                } else {
+                    System.out.println("Operación no válida para una esfera.");
+                }
+                break;
+
+            case 5: // Cubo
+                System.out.println("Ingresa el lado:");
+                lado = scanner.nextDouble();
+                if (operacion == 2) {
+                    System.out.println("Área: " + areaCubo(lado));
+                } else if (operacion == 3) {
+                    System.out.println("Volumen: " + volumenCubo(lado));
+                } else {
+                    System.out.println("Operación no válida para un cubo.");
+                }
+                break;
+
+            case 6: // Cono
+                System.out.println("Ingresa el radio:");
+                radio = scanner.nextDouble();
+                System.out.println("Ingresa la altura:");
+                altura = scanner.nextDouble();
+                if (operacion == 3) {
+                    System.out.println("Volumen: " + volumenCono(radio, altura));
+                } else if (operacion == 2) {
+                    System.out.println("Ingresa la generatriz:");
+                    double generatriz = scanner.nextDouble();
+                    System.out.println("Área lateral: " + areaLateralCono(radio, generatriz));
+                } else {
+                    System.out.println("Operación no válida para un cono.");
+                }
+                break;
+
+            default:
+                System.out.println("Figura geométrica no válida.");
+        }
+
+
     }
 
 }
+
+
