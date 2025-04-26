@@ -16,6 +16,8 @@ public class Main {
         double porcentaje = calcularPorcentaje(100, 50);
         System.out.println("El calculo del porcentaje solicitado es: " + porcentaje);
 
+        System.out.println(ecuacionRecta(1,2,3,6));
+
     }
     public static int numeromayor(int numero1, int numero2){
         if (numero1 > numero2) {
@@ -45,6 +47,12 @@ public class Main {
         double transformarPorcentaje = porcentaje/100;
         double calculo = (numero * transformarPorcentaje);
         return calculo;
+    }
+
+    public static String ecuacionRecta(double x1, double y1, double x2, double y2){
+        double  m = (y2-y1) / (x2-x1);
+        double b = y1 - (m*x1);
+        return "Y = " + m + "X + " + b;
     }
 
 }
