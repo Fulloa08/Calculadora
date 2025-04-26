@@ -188,7 +188,6 @@ public class Main {
                 System.out.println("Figura geométrica no válida.");
         }
 
-
     }
 
 }
