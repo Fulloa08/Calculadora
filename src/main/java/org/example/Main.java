@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Main {
     private static Scanner scanner=new Scanner(System.in);
     public static void main(String[] args) {
+     
         menu();
     }
 
@@ -43,7 +44,7 @@ public class Main {
             sistemaCuadratico();
         }
         if (input==5) {
-            ecuacionRecta();
+            ecuacionRecta(1,2,3,6);
         }
     }
 
@@ -125,6 +126,10 @@ public class Main {
 
     private static void sistemaCuadratico() {}
 
-    private static void ecuacionRecta() {}
+    public static String ecuacionRecta(double x1, double y1, double x2, double y2){
+        double  m = (y2-y1) / (x2-x1);
+        double b = y1 - (m*x1);
+        return "Y = " + m + "X + " + b;
 }
+
 
