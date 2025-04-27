@@ -205,6 +205,26 @@ public class Main {
         System.out.println("Las soluciones son: x1 = " + x1 + ", x2 = " + x2);
     }
 
+    public class SistemaLineal {
+        public static void resolverSistema(double A, double B, double C, double D, double E, double F) {
+            double determinante = (A * E) - (B * D);
+            if (determinante == 0) {
+                System.out.println("El sistema no tiene solución única (las rectas son paralelas o coincidentes).");
+                return;
+            }
+            double determinanteX = (C * E) - (B * F);
+            double determinanteY = (A * F) - (C * D);
+            double x = determinanteX / determinante;
+            double y = determinanteY / determinante;
+
+            System.out.println("La solución es: x = " + x + ", y = " + y);
+        }
+
+        public static void main(String[] args) {
+            resolverSistema(3, 2, 8, 5, 7, 13);
+        }
+    }
+
 }
 
 
