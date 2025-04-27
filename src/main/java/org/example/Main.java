@@ -1,198 +1,160 @@
 package org.example;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
+    private static Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
-        int mayor = numeromayor(1,2);
-        System.out.println("el número mayor es: " + mayor);
-
-        int menor = numeromenor(3,2);
-        System.out.println("el número menor es: " + menor);
-
-        double resultado = potenciaDeUnNumero(2,4);
-        System.out.println("el resultado es: " + resultado);
-
-        double porcentaje = calcularPorcentaje(100, 50);
-        System.out.println("El calculo del porcentaje solicitado es: " + porcentaje);
-
-        System.out.println(ecuacionRecta(1,2,3,6));
-
-        resolverCuadratica(2.0,8.0,4.0);
-        resolverSistema(3, 2, 8, 5, 7, 13);
-        calcularFigurasGeometrica();
-
-    }
-    public static int numeromayor(int numero1, int numero2){
-        if (numero1 > numero2) {
-            return numero1;
-        } else if (numero2 > numero1) {
-            return numero2;
-        } else {
-            throw new IllegalArgumentException("Los números son iguales.");
-        }
+        menu();
     }
 
-    public static int numeromenor(int numero1, int numero2){
-        if (numero1 < numero2) {
-            return numero1;
-        } else if (numero2 < numero1) {
-            return numero2;
-        } else {
-            throw new IllegalArgumentException("Los números son iguales.");
-        }
+    private static void menu() {
+        int input;
+        do {
+            mostrarOpciones();
+            input = validarMenu();
+            ejecutar(input);
+        } while (input != 6);
+        System.out.println("¡Gracias por usar la Calculadora Científica! Hasta pronto.");
     }
 
-    public static double potenciaDeUnNumero(double base, double exponente){
-        return Math.pow(base,exponente);
+    private static void mostrarOpciones() {
+        System.out.println("\n=== Calculadora Científica ===");
+        System.out.println("Seleccione una opción:");
+        System.out.println("1 - Operaciones Aritméticas");
+        System.out.println("2 - Resolver Ecuación Cuadrática");
+        System.out.println("3 - Cálculo de Figuras Geométricas");
+        System.out.println("4 - Sistema de Ecuaciones Lineales");
+        System.out.println("5 - Ecuación de la Recta");
+        System.out.println("6 - Salir\n");
+        System.out.print("Ingrese su opción: ");
     }
 
-    public static double calcularPorcentaje(double numero, double porcentaje){
-        double transformarPorcentaje = porcentaje/100;
-        double calculo = (numero * transformarPorcentaje);
-        return calculo;
-    }
-
-    public static String ecuacionRecta(double x1, double y1, double x2, double y2){
-        double  m = (y2-y1) / (x2-x1);
-        double b = y1 - (m*x1);
-        return "Y = " + m + "X + " + b;
-    }
-    public static double perimetroCuadrado(double lado){
-        return 4 * lado;
-    }
-    public static double areaCuadrado(double lado){
-        return lado * lado;
-    }
-    public static double perimetroRectangulo(double base, double altura){
-        return 2 * (base + altura);
-    }
-    public static double areaRectangulo(double base, double altura){
-        return base * altura;
-    }
-    public static double perimetroCirculo (double radio ){
-        return 2 * Math.PI * radio;
-    }
-    public static double areaCirculo(double radio) {
-        return Math.PI * radio * radio;
-    }
-    public static double volumenEsfera(double radio){
-        return (4.0 / 3.0) * Math.PI * Math.pow(radio, 3);
-    }
-    public static double areaEsfera(double radio) {
-        return 4 * Math.PI * Math.pow(radio, 2);
-    }
-    public static double volumenCubo(double lado){
-        return Math.pow(lado, 3);
-    }
-    public static double areaCubo(double lado) {
-        return 6 * Math.pow(lado, 2);
-    }
-    public static double volumenCono(double radio, double altura) {
-        return (Math.PI * Math.pow(radio, 2) * altura) / 3;
-    }
-    public static double areaLateralCono(double radio, double generatriz){
-        return Math.PI * radio * generatriz;
-    }
-    public static void calcularFigurasGeometrica(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Selecciona una figura geométrica:");
-        System.out.println("1. Cuadrado\n2. Rectángulo\n3. Círculo\n4. Esfera\n5. Cubo\n6. Cono");
-
-        int figura = scanner.nextInt();
-
-        System.out.println("Selecciona una operación:");
-        System.out.println("1. Perímetro\n2. Área\n3. Volumen (si aplica)");
-        int operacion = scanner.nextInt();
-
-        switch (figura){
+    private static void ejecutar(int input) {
+        switch (input) {
             case 1:
-                System.out.println("Ingresa el lado:");
-                double lado = scanner.nextDouble();
-                if (operacion == 1) {
-                    System.out.println("Perímetro: " + perimetroCuadrado(lado));
-                } else if (operacion == 2) {
-                    System.out.println("Área: " + areaCuadrado(lado));
-                } else {
-                    System.out.println("Operación no válida para un cuadrado.");
-                }
+                operacionAritmetrica();
                 break;
-
-            case 2: // Rectángulo
-                System.out.println("Ingresa la base:");
-                double base = scanner.nextDouble();
-                System.out.println("Ingresa la altura:");
-                double altura = scanner.nextDouble();
-                if (operacion == 1) {
-                    System.out.println("Perímetro: " + perimetroRectangulo(base, altura));
-                } else if (operacion == 2) {
-                    System.out.println("Área: " + areaRectangulo(base, altura));
-                } else {
-                    System.out.println("Operación no válida para un rectángulo.");
-                }
+            case 2:
+                pedirDatosCuadratica();
                 break;
-
-            case 3: // Círculo
-                System.out.println("Ingresa el radio:");
-                double radio = scanner.nextDouble();
-                if (operacion == 1) {
-                    System.out.println("Perímetro: " + perimetroCirculo(radio));
-                } else if (operacion == 2) {
-                    System.out.println("Área: " + areaCirculo(radio));
-                } else {
-                    System.out.println("Operación no válida para un círculo.");
-                }
+            case 3:
+                calcularFigurasGeometricas();
                 break;
-
-            case 4: // Esfera
-                System.out.println("Ingresa el radio:");
-                radio = scanner.nextDouble();
-                if (operacion == 2) {
-                    System.out.println("Área: " + areaEsfera(radio));
-                } else if (operacion == 3) {
-                    System.out.println("Volumen: " + volumenEsfera(radio));
-                } else {
-                    System.out.println("Operación no válida para una esfera.");
-                }
+            case 4:
+                sistemaCuadratico();
                 break;
-
-            case 5: // Cubo
-                System.out.println("Ingresa el lado:");
-                lado = scanner.nextDouble();
-                if (operacion == 2) {
-                    System.out.println("Área: " + areaCubo(lado));
-                } else if (operacion == 3) {
-                    System.out.println("Volumen: " + volumenCubo(lado));
-                } else {
-                    System.out.println("Operación no válida para un cubo.");
-                }
+            case 5:
+                ecuacionRecta();
                 break;
-
-            case 6: // Cono
-                System.out.println("Ingresa el radio:");
-                radio = scanner.nextDouble();
-                System.out.println("Ingresa la altura:");
-                altura = scanner.nextDouble();
-                if (operacion == 3) {
-                    System.out.println("Volumen: " + volumenCono(radio, altura));
-                } else if (operacion == 2) {
-                    System.out.println("Ingresa la generatriz:");
-                    double generatriz = scanner.nextDouble();
-                    System.out.println("Área lateral: " + areaLateralCono(radio, generatriz));
-                } else {
-                    System.out.println("Operación no válida para un cono.");
-                }
+            case 6:
+                // Salir
                 break;
-
             default:
-                System.out.println("Figura geométrica no válida.");
+                System.out.println("Opción inválida. Intente nuevamente.");
         }
-
     }
-    public static void resolverCuadratica(double A, double B, double C) {
 
+    private static void operacionAritmetrica() {
+        System.out.println("\n*** Operaciones Aritméticas ***");
+        System.out.println("Símbolos válidos:");
+        System.out.println("+ (suma), - (resta), * (multiplicación), / (división),");
+        System.out.println("<> (comparar mayor o menor), ^ (potencia), % (porcentaje)");
+
+        System.out.print("Ingrese el primer número: ");
+        int primerDigito = validarNumero();
+
+        System.out.print("Ingrese el símbolo de la operación: ");
+        String simboloOperacion = validarSimbolo();
+
+        System.out.print("Ingrese el segundo número: ");
+        int segundoDigito = validarNumero();
+
+        switch (simboloOperacion) {
+            case "+":
+                suma(primerDigito, segundoDigito);
+                break;
+            case "-":
+                resta(primerDigito, segundoDigito);
+                break;
+            case "*":
+                multi(primerDigito, segundoDigito);
+                break;
+            case "/":
+                division(primerDigito, segundoDigito);
+                break;
+            case "<>":
+                determinarMayorMenor(primerDigito, segundoDigito);
+                break;
+            case "^":
+                elevado(primerDigito, segundoDigito);
+                break;
+            case "%":
+                porcentaje(primerDigito, segundoDigito);
+                break;
+            default:
+                System.out.println("Operación no reconocida.");
+        }
+    }
+
+    private static void suma(int a, int b) {
+        System.out.println("Resultado: " + (a + b));
+    }
+
+    private static void resta(int a, int b) {
+        System.out.println("Resultado: " + (a - b));
+    }
+
+    private static void multi(int a, int b) {
+        System.out.println("Resultado: " + (a * b));
+    }
+
+    private static void division(int a, int b) {
+        try {
+            System.out.println("Resultado: " + (a / b));
+        } catch (ArithmeticException e) {
+            System.out.println("Error: No se puede dividir por cero.");
+        }
+    }
+
+    private static void determinarMayorMenor(int a, int b) {
+        if (a > b) {
+            System.out.println(a + " es mayor que " + b);
+        } else if (a < b) {
+            System.out.println(a + " es menor que " + b);
+        } else {
+            System.out.println("Ambos números son iguales.");
+        }
+    }
+
+    private static void elevado(int base, int exponente) {
+        System.out.println("Resultado: " + (int)Math.pow(base, exponente));
+    }
+
+    private static void porcentaje(int parte, int total) {
+        if (total == 0) {
+            System.out.println("Error: Total no puede ser cero.");
+        } else {
+            double resultado = (parte * 100.0) / total;
+            System.out.println("Porcentaje: " + resultado + "%");
+        }
+    }
+
+    private static void pedirDatosCuadratica() {
+        System.out.println("\n*** Resolver Ecuación Cuadrática ***");
+        System.out.println("Formato: Ax^2 + Bx + C = 0");
+        System.out.print("Ingrese A: ");
+        double A = validarNumero();
+        System.out.print("Ingrese B: ");
+        double B = validarNumero();
+        System.out.print("Ingrese C: ");
+        double C = validarNumero();
+        resolverCuadratica(A, B, C);
+    }
+
+    private static void resolverCuadratica(double A, double B, double C) {
         double discriminante = (B * B) - (4 * A * C);
 
         if (discriminante < 0) {
@@ -201,25 +163,182 @@ public class Main {
         }
         double x1 = (-B + Math.sqrt(discriminante)) / (2 * A);
         double x2 = (-B - Math.sqrt(discriminante)) / (2 * A);
-
-        System.out.println("Las soluciones son: x1 = " + x1 + ", x2 = " + x2);
+        System.out.println("Soluciones:");
+        System.out.println("x1 = " + x1);
+        System.out.println("x2 = " + x2);
     }
 
-    public static void resolverSistema(double A, double B, double C, double D, double E, double F) {
-        double determinante = (A * E) - (B * D);
+    private static void sistemaCuadratico() {
+        System.out.println("\n*** Resolver Sistema de Ecuaciones Lineales ***");
+        System.out.println("Formato:");
+        System.out.println("A*x + B*y = C");
+        System.out.println("D*x + E*y = F");
+
+        System.out.print("Ingrese A: ");
+        double A = validarNumero();
+        System.out.print("Ingrese B: ");
+        double B = validarNumero();
+        System.out.print("Ingrese C: ");
+        double C = validarNumero();
+        System.out.print("Ingrese D: ");
+        double D = validarNumero();
+        System.out.print("Ingrese E: ");
+        double E = validarNumero();
+        System.out.print("Ingrese F: ");
+        double F = validarNumero();
+
+        resolverSistema(A, B, C, D, E, F);
+    }
+
+    private static void resolverSistema(double A, double B, double C, double D, double E, double F) {
+        double determinante = A * E - B * D;
         if (determinante == 0) {
-            System.out.println("El sistema no tiene solución única (las rectas son paralelas o coincidentes).");
+            System.out.println("El sistema no tiene solución única.");
             return;
         }
-        double determinanteX = (C * E) - (B * F);
-        double determinanteY = (A * F) - (C * D);
-        double x = determinanteX / determinante;
-        double y = determinanteY / determinante;
+        double x = (C * E - B * F) / determinante;
+        double y = (A * F - C * D) / determinante;
+        System.out.println("Soluciones:");
+        System.out.println("x = " + x);
+        System.out.println("y = " + y);
+    }
 
-        System.out.println("La solución es: x = " + x + ", y = " + y);
+    public static void ecuacionRecta() {
+
+        System.out.print("Introduce el valor de x1: ");
+        double x1 = scanner.nextDouble();
+        System.out.print("Introduce el valor de y1: ");
+        double y1 = scanner.nextDouble();
+        System.out.print("Introduce el valor de x2: ");
+        double x2 = scanner.nextDouble();
+        System.out.print("Introduce el valor de y2: ");
+        double y2 = scanner.nextDouble();
+
+        double m = (y2 - y1) / (x2 - x1);
+
+        double b = y1 - m * x1;
+
+        System.out.println("La ecuación de la recta que pasa por los puntos (" + x1 + ", " + y1 + ") y (" + x2 + ", " + y2 + ") es:");
+        System.out.println("y = " + m + "x + " + b);
+    }
+
+    private static void calcularFigurasGeometricas() {
+        System.out.println("\n*** Cálculo de Figuras Geométricas ***");
+        System.out.println("1 - Cuadrado\n2 - Rectángulo\n3 - Círculo\n4 - Esfera\n5 - Cubo\n6 - Cono");
+        System.out.print("Seleccione una figura: ");
+        int figura = validarNumero();
+
+        System.out.println("Operaciones disponibles:");
+        System.out.println("1 - Perímetro\n2 - Área\n3 - Volumen (si aplica)");
+        System.out.print("Seleccione la operación: ");
+        int operacion = validarNumero();
+
+        switch (figura) {
+            case 1:
+                System.out.print("Ingrese el lado del cuadrado: ");
+                double lado = scanner.nextDouble();
+                if (operacion == 1) {
+                    System.out.println("Perímetro: " + (4 * lado));
+                } else if (operacion == 2) {
+                    System.out.println("Área: " + (lado * lado));
+                } else {
+                    System.out.println("Un cuadrado no tiene volumen.");
+                }
+                break;
+            case 2:
+                System.out.print("Ingrese la base del rectángulo: ");
+                double base = scanner.nextDouble();
+                System.out.print("Ingrese la altura: ");
+                double altura = scanner.nextDouble();
+                if (operacion == 1) {
+                    System.out.println("Perímetro: " + (2 * (base + altura)));
+                } else if (operacion == 2) {
+                    System.out.println("Área: " + (base * altura));
+                } else {
+                    System.out.println("Un rectángulo no tiene volumen.");
+                }
+                break;
+            case 3:
+                System.out.print("Ingrese el radio del círculo: ");
+                double radio = scanner.nextDouble();
+                if (operacion == 1) {
+                    System.out.println("Perímetro (circunferencia): " + (2 * Math.PI * radio));
+                } else if (operacion == 2) {
+                    System.out.println("Área: " + (Math.PI * radio * radio));
+                } else {
+                    System.out.println("Un círculo no tiene volumen.");
+                }
+                break;
+            case 4:
+                System.out.print("Ingrese el radio de la esfera: ");
+                radio = scanner.nextDouble();
+                if (operacion == 2) {
+                    System.out.println("Área: " + (4 * Math.PI * radio * radio));
+                } else if (operacion == 3) {
+                    System.out.println("Volumen: " + (4.0 / 3.0 * Math.PI * Math.pow(radio, 3)));
+                } else {
+                    System.out.println("Una esfera no tiene perímetro.");
+                }
+                break;
+            case 5:
+                System.out.print("Ingrese el lado del cubo: ");
+                lado = scanner.nextDouble();
+                if (operacion == 2) {
+                    System.out.println("Área: " + (6 * lado * lado));
+                } else if (operacion == 3) {
+                    System.out.println("Volumen: " + (Math.pow(lado, 3)));
+                } else {
+                    System.out.println("Un cubo no tiene perímetro.");
+                }
+                break;
+            case 6:
+                System.out.print("Ingrese el radio del cono: ");
+                radio = scanner.nextDouble();
+                System.out.print("Ingrese la altura del cono: ");
+                altura = scanner.nextDouble();
+                if (operacion == 3) {
+                    System.out.println("Volumen: " + (Math.PI * radio * radio * altura) / 3);
+                } else if (operacion == 2) {
+                    System.out.print("Ingrese la generatriz del cono: ");
+                    double generatriz = scanner.nextDouble();
+                    System.out.println("Área lateral: " + (Math.PI * radio * generatriz));
+                } else {
+                    System.out.println("El perímetro no aplica para conos.");
+                }
+                break;
+            default:
+                System.out.println("Figura no reconocida.");
+        }
+    }
+
+    private static int validarMenu() {
+        try {
+            int input = scanner.nextInt();
+            if (input >= 1 && input <= 6) {
+                return input;
+            } else {
+                System.out.println("Error: Solo números entre 1 y 6.");
+                return 0;
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Error: Debe ingresar un número.");
+            scanner.next(); // Limpiar el scanner
+            return 0;
+        }
+    }
+
+    private static int validarNumero() {
+        while (!scanner.hasNextDouble()) {
+            System.out.println("Error: Solo números.");
+            scanner.next();
+            System.out.print("Ingrese nuevamente: ");
+        }
+        return (int) scanner.nextDouble();
+    }
+
+    private static String validarSimbolo() {
+        String simbolo = scanner.next();
+        return simbolo.trim();
     }
 }
-
-
-
 
