@@ -224,7 +224,6 @@ public class Main {
             resolverSistema(3, 2, 8, 5, 7, 13);
         }
     }
-
 }
 
 
