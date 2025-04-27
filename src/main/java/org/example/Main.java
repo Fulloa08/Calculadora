@@ -133,6 +133,15 @@ public class Main {
     }
 
     private static void sistemaCuadratico() {
+        System.out.println("Proporcione A, B y C de la funcion Ax+By=C");
+        double A=validarNumero();
+        double B=validarNumero();
+        double C=validarNumero();
+        System.out.println("Proporcione D, E y F de la funcion Dx+Ey=F");
+        double D=validarNumero();
+        double E=validarNumero();
+        double F=validarNumero();
+        resolucionSistema(A, B, C, D, E, F);
     }
 
     private static String ecuacionRecta(double x1, double y1, double x2, double y2) {
@@ -176,5 +185,15 @@ public class Main {
                     System.out.println("Input invalido");
                     return("");
                 }
+    }
+
+    private static void resolucionSistema(double A, double B, double C, double D, double E, double F) {
+        double determinante=A*E-B*D;
+        if (determinante==0) {
+            throw new IllegalArgumentException("El sistema no tiene solucion");
+        }
+        double x= (C*E-B*F)/determinante;
+        double y= (A*F-C*D)/determinante;
+        System.out.println("La solucion del sistemas es x="+x+"e y="+y);
     }
 }
