@@ -21,8 +21,8 @@ public class Main {
         System.out.println(ecuacionRecta(1,2,3,6));
 
         resolverCuadratica(2.0,8.0,4.0);
+        resolverSistema(3, 2, 8, 5, 7, 13);
         calcularFigurasGeometrica();
-
 
     }
     public static int numeromayor(int numero1, int numero2){
@@ -205,26 +205,21 @@ public class Main {
         System.out.println("Las soluciones son: x1 = " + x1 + ", x2 = " + x2);
     }
 
-    public class SistemaLineal {
-        public static void resolverSistema(double A, double B, double C, double D, double E, double F) {
-            double determinante = (A * E) - (B * D);
-            if (determinante == 0) {
-                System.out.println("El sistema no tiene solución única (las rectas son paralelas o coincidentes).");
-                return;
-            }
-            double determinanteX = (C * E) - (B * F);
-            double determinanteY = (A * F) - (C * D);
-            double x = determinanteX / determinante;
-            double y = determinanteY / determinante;
-
-            System.out.println("La solución es: x = " + x + ", y = " + y);
+    public static void resolverSistema(double A, double B, double C, double D, double E, double F) {
+        double determinante = (A * E) - (B * D);
+        if (determinante == 0) {
+            System.out.println("El sistema no tiene solución única (las rectas son paralelas o coincidentes).");
+            return;
         }
+        double determinanteX = (C * E) - (B * F);
+        double determinanteY = (A * F) - (C * D);
+        double x = determinanteX / determinante;
+        double y = determinanteY / determinante;
 
-        public static void main(String[] args) {
-            resolverSistema(3, 2, 8, 5, 7, 13);
-        }
+        System.out.println("La solución es: x = " + x + ", y = " + y);
     }
 }
+
 
 
 
