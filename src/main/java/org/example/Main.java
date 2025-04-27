@@ -53,9 +53,9 @@ public class Main {
     }
 
     private static void operacionAritmetrica() {
-        int primerDigito = scanner.nextInt();
-        String simboloOperacion = scanner.nextLine();
-        int segundoDigito = scanner.nextInt();
+        int primerDigito = validarNumero();
+        String simboloOperacion = validarSimbolo();
+        int segundoDigito = validarNumero();
         if (simboloOperacion.equals("+")) {
             suma(primerDigito, segundoDigito);
         }
@@ -77,6 +77,9 @@ public class Main {
         }
         if (simboloOperacion.equals("%")) {
             porcentaje(primerDigito, segundoDigito);
+        }
+        if (simboloOperacion.isEmpty()) {
+            System.out.println(" ");
         }
     }
 
@@ -151,7 +154,27 @@ public class Main {
             System.out.println("Solo se admiten numeros");
             return (0);
         }
+    }
+
+    private static int validarNumero() {
+        int numero;
+        try {
+            numero= scanner.nextInt();
+            return (numero);
+    } catch (InputMismatchException e) {
+            System.out.println("Solo se admiten numeros");
+            return (0);
         }
     }
 
-
+    private static String validarSimbolo() {
+        String simbolo;
+                try {
+                    simbolo= scanner.nextLine();
+                    return (simbolo);
+                } catch (InputMismatchException e) {
+                    System.out.println("Input invalido");
+                    return("");
+                }
+    }
+}
