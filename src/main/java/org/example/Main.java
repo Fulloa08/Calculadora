@@ -20,7 +20,9 @@ public class Main {
 
         System.out.println(ecuacionRecta(1,2,3,6));
 
+        resolverCuadratica(2.0,8.0,4.0);
         calcularFigurasGeometrica();
+
 
     }
     public static int numeromayor(int numero1, int numero2){
@@ -189,6 +191,20 @@ public class Main {
         }
 
     }
+    public static void resolverCuadratica(double A, double B, double C) {
+
+        double discriminante = (B * B) - (4 * A * C);
+
+        if (discriminante < 0) {
+            System.out.println("La ecuación no tiene soluciones reales.");
+            return;
+        }
+        double x1 = (-B + Math.sqrt(discriminante)) / (2 * A);
+        double x2 = (-B - Math.sqrt(discriminante)) / (2 * A);
+
+        System.out.println("Las soluciones son: x1 = " + x1 + ", x2 = " + x2);
+    }
+
 }
 
 
